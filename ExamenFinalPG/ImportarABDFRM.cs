@@ -82,6 +82,11 @@ namespace ExamenFinalPG
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ConsultarBDFrmcs consultarFrm = new ConsultarBDFrmcs();
+            consultarFrm.Show();
+        }
     }
     }
 

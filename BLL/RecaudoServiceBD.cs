@@ -38,5 +38,37 @@ namespace BLL
                 finally { conexion.Close(); }
             }
         }
+
+        public RespuestaConsulta ConsultarRecaudos()
+        {
+            RespuestaConsulta respuesta = new RespuestaConsulta();
+            try
+            {
+
+                conexion.Open();
+                respuesta.recaudos = RepositorioRecaudo.ConsultarRecaudos();
+                conexion.Close();
+                if (respuesta.recaudos.Count > 0)
+                {
+                    respuesta.Mensaje = "Se consultan los Datos";
+                }
+                else
+                {
+                    respuesta.Mensaje = "No hay datos para consultar";
+                }
+                respuesta.Error = false;
+                return respuesta;
+            }
+            catch (Exception e)
+            {
+                respuesta.Mensaje = $"Error de la Aplicacion: {e.Message}";
+                respuesta.Error = true;
+                return respuesta;
+            }
+            finally { conexion.Close(); }
+
+        }
+
+
     }
 }

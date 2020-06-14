@@ -34,6 +34,41 @@ namespace Dal
                 var filas = command.ExecuteNonQuery();
 
             }
+        
+    }
+
+        public IList<Recaudo> ConsultarRecaudos()
+        {
+            SqlDataReader dataReader;
+           
+            using (var command = _connection.CreateCommand())
+            {
+                command.CommandText = "Select * from Recaudos ";
+                dataReader = command.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        Recaudo recaudo = Mapear(dataReader);
+                        recaudos.Add(recaudo);
+                    }
+                }
+            }
+            return recaudos;
+        }
+
+        private Recaudo Mapear(SqlDataReader dataReader)
+        {
+            if (!dataReader.HasRows) return null;
+            Recaudo recaudo = new Recaudo();
+           recaudo.Nitagente = (string)dataReader["NitAgente"];
+           recaudo.Mes = (string)dataReader["Mes"];
+           recaudo.Año= (string)dataReader["Año"];
+           recaudo.TipoEstampilla= (string)dataReader["TipoEstampilla"];
+            recaudo.valor = (decimal)dataReader["Valor"];
+            recaudo.IdentificacionContratista = (string)dataReader["Identificacion"];
+            recaudo.Nombre = (string)dataReader["Nombre"];
+            return recaudo;
         }
     }
 }
