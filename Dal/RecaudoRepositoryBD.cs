@@ -70,5 +70,29 @@ namespace Dal
             recaudo.Nombre = (string)dataReader["Nombre"];
             return recaudo;
         }
+
+
+        public IList<Recaudo> ConsultarPorAgenteMes(string nitAgente, string mes, string año)
+        {
+            SqlDataReader dataReader;
+             using (var command = _connection.CreateCommand())
+            {
+               command.CommandText = @"Select * from Recaudos where NitAgente=@NitAgente and Mes = @Mes and Año= @Año";
+               command.Parameters.AddWithValue("@NitAgente", nitAgente);
+                command.Parameters.AddWithValue("@Mes", mes);
+                command.Parameters.AddWithValue("@Año", año);
+
+                dataReader = command.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        Recaudo recaudo = Mapear(dataReader);
+                        recaudos.Add(recaudo);
+                    }
+                }
+            }
+            return recaudos;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace ExamenFinalPG
     {
         RespuestaConsulta respuestaConsulta;
         RecaudoServiceBD recaudoservice;
+        ResponseConsulta respuestafiltro;
         public ConsultarBDFrmcs()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["ConnectionRochety"].ConnectionString;
@@ -37,6 +38,14 @@ namespace ExamenFinalPG
         {
             if (TipoConsultaCmb.SelectedIndex == 0) {
                 dataGridView1.DataSource = respuestaConsulta.recaudos;
+            }
+
+            else if (TipoConsultaCmb.SelectedIndex == 1)
+            { string nitAgente = Nittxt.Text;
+                string mes = Mestxt.Text;
+                string año = AñoTxt.Text;
+                respuestafiltro = recaudoservice.ConsultarPorAgenteMesYVigencia(nitAgente, mes, año);
+                dataGridView1.DataSource = respuestafiltro.recaudosFiltros;
             }
         }
     }

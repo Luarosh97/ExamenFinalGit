@@ -70,5 +70,36 @@ namespace BLL
         }
 
 
-    }
+        public ResponseConsulta ConsultarPorAgenteMesYVigencia(string nitAgente, string mes, string año)
+        {
+            ResponseConsulta respuestafiltro = new ResponseConsulta();
+            try
+            {
+                respuestafiltro.recaudos = RepositorioRecaudo.ConsultarPorAgenteMes(nitAgente, mes, año);
+
+                if (respuestafiltro.recaudos.Count == 0)
+                {
+                    respuestafiltro.Mensaje = "No Hay recaudos en La lista";
+
+                }
+                else
+                {
+                    respuestafiltro.Mensaje = "list de recaudos consultados correctamene";
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                respuestafiltro.Error = true;
+                respuestafiltro.Mensaje = "Erro en datos: " + ex.Message;
+            }
+            return respuestafiltro;
+        }
+
+
+
+
+
+        }
 }

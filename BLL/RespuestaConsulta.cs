@@ -14,4 +14,11 @@ namespace BLL
         public string Mensaje { get; set; }
         public IList<Recaudo> recaudos{ get; set; }
     }
+
+    public class ResponseConsulta {
+        public bool Error { get; set; }
+        public string Mensaje { get; set; }
+        public IList<Recaudo> recaudosFiltros {get;set;}
+
+    }
 }

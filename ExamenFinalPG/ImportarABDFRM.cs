@@ -46,7 +46,7 @@ namespace ExamenFinalPG
                     using (StreamReader lector = new StreamReader(fileStream))
                     {
 
-                        //fileContent = lector.ReadToEnd();
+                       
                         while ((linea = lector.ReadLine()) != null)
                         {
 
