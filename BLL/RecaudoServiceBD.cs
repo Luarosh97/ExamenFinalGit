@@ -75,9 +75,9 @@ namespace BLL
             ResponseConsulta respuestafiltro = new ResponseConsulta();
             try
             {
-                respuestafiltro.recaudos = RepositorioRecaudo.ConsultarPorAgenteMes(nitAgente, mes, año);
+                respuestafiltro.recaudosFiltros= RepositorioRecaudo.ConsultarPorAgenteMes(nitAgente, mes, año);
 
-                if (respuestafiltro.recaudos.Count == 0)
+                if (respuestafiltro.recaudosFiltros.Count == 0)
                 {
                     respuestafiltro.Mensaje = "No Hay recaudos en La lista";
 
